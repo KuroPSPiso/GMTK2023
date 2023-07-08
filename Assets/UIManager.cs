@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
         {
             this.TMPCoins.text = this.gameManager.Coins.ToString();
             this.Continue.SetActive(this.gameManager.IsCountDown);
+            this.TMPContinueCount.text = this.gameManager.CountDownTimer.ToString();
             this.GameOver.SetActive(this.gameManager.IsGameOver);
         }
     }
@@ -57,7 +58,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         RenderPlayerUI();
         RenderAIUI();

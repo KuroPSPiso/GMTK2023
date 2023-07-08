@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver;
     public bool IsCountDown;
     public int CountDownTimer { get { return (int)(this.countDownTimer + 0.5f); } }
-    private bool hasStartedCountDown = false;
 
     private PlayerManager playerManager;
     private bool hasInitialized = false;
@@ -20,10 +19,10 @@ public class GameManager : MonoBehaviour
         this.playerManager.Health = 3;
         this.IsCountDown = false;
         this.IsGameOver = false;
-        this.hasStartedCountDown = false;
         this.hasInitialized = true;
     }
 
+    [ContextMenu("Continue")]
     public void IsContinue()
     {
         this.Coins--;
@@ -43,14 +42,14 @@ public class GameManager : MonoBehaviour
             {
                 this.countDownTimer -= Time.deltaTime;
 
-                if (!this.hasStartedCountDown)
+                if (!this.IsCountDown)
                 {
-                    this.countDownTimer = 9;
-                    this.hasStartedCountDown = true;
+                    this.countDownTimer = 9f;
+                    this.IsCountDown = true;
                 }
             }
 
-            if(this.Coins == 0 && this.countDownTimer == 0)
+            if(this.playerManager.Health == 0 && (this.Coins == 0 || this.countDownTimer <= 0f))
             {
                 this.IsGameOver = true;
             }
