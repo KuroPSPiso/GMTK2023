@@ -43,7 +43,7 @@ public class CameraSetup : MonoBehaviour
 
             Camera.main.pixelRect = new Rect(0, heightOffset, (int)newWidth, height);
             Camera.main.fieldOfView = 90f;
-            Debug.Log(Camera.main.pixelRect);
+            //Debug.Log(Camera.main.pixelRect);
         }
         else
         {
@@ -55,7 +55,7 @@ public class CameraSetup : MonoBehaviour
             widthOffset /= 2;
             Camera.main.pixelRect = new Rect(widthOffset, 0, width, Screen.height);
             Camera.main.fieldOfView = Camera.VerticalToHorizontalFieldOfView(90f, this.XYScale.x / this.XYScale.y);
-            Debug.Log(Camera.main.pixelRect);
+            //Debug.Log(Camera.main.pixelRect);
         }
 
         this.lastTateModeSetting = this.IsTateMode;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2669200439011870171}
   - component: {fileID: 2669200439011870168}
+  - component: {fileID: -6605904978343266763}
   m_Layer: 0
   m_Name: Bullet_Pellet
   m_TagString: Untagged
@@ -43,7 +44,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -59,6 +60,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &-6605904978343266763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669200439011870170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac8ddb121bb8b7418a6b5d72c9e7ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageOnHit: 1
+  Speed: 5
+  IsFromPlayer: 0
+  SoundClip: {fileID: 0}
 --- !u!1001 &6646387824460938147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79ad39f0b056e449e7708425743536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 200
 --- !u!4 &5855125949711632911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 971968848838422956, guid: 94e0eef6698bec848a0a0abe9b27a568,
