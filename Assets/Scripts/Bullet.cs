@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        this.transform.position += Vector3.up * this.Speed * Time.deltaTime;
+        this.transform.position += this.direction * this.Speed * Time.deltaTime;
 
         if (!this.isDestroying)
         {
@@ -46,6 +46,7 @@ public class Bullet : MonoBehaviour
                     {
                         GameObject.Destroy(child.gameObject);
                     }
+                    GameObject.Destroy(this.gameObject);
                 }
             }
         }
@@ -58,7 +59,7 @@ public class Bullet : MonoBehaviour
         string tag = collider.gameObject.tag.ToUpper();
         bool isHittingPlayer = tag.Contains("PLAYER");
 
-        Debug.Log($"is hitting player: {isHittingPlayer} & {this.IsFromPlayer}");
+        //Debug.Log($"is hitting player: {isHittingPlayer} & {this.IsFromPlayer}");
 
         if (tag.Contains("VESSEL") || isHittingPlayer)
         {
@@ -71,7 +72,16 @@ public class Bullet : MonoBehaviour
                 }
                 else
                 {
-                    //deal % damage
+                    AIHealth aiEntity;
+                    if (collider.gameObject.TryGetComponent<AIHealth>(out aiEntity))
+                    {
+                        int scoreReceived = 0;
+                        if (aiEntity.DealDamage(this.DamageOnHit, out scoreReceived))
+                        {
+                            PlayerManager playerManager;
+                            if (Managers.TryGetPlayerManager(out playerManager)) playerManager.Score += scoreReceived;
+                        }
+                    }
                 }
 
                 if (!this.isDestroying)
@@ -81,6 +91,7 @@ public class Bullet : MonoBehaviour
                         this.isDestroying = true;
                         GameObject.Destroy(child.gameObject);
                     }
+                    GameObject.Destroy(this.gameObject);
                 }
             }
         }

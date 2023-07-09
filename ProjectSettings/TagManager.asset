@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BGCamera
   - VESSEL
+  - SPAWN
   layers:
   - Default
   - TransparentFX

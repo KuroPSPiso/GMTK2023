@@ -7,10 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(UIManager))]
 [RequireComponent(typeof(GameManager))]
+[RequireComponent(typeof(AIManager))]
 public class Managers : MonoBehaviour
 {
     private static DestroyManager destroyManager;
     private static PlayerManager playerManager;
+    private static AIManager aiManager;
     private static UIManager uiManager;
     private static GameManager gameManager;
     public static bool IsReady = false;
@@ -31,6 +33,14 @@ public class Managers : MonoBehaviour
         return true;
     }
 
+    public static bool TryGetAIManager(out AIManager refAIManager)
+    {
+        refAIManager = null;
+        if (!IsReady) return false;
+        refAIManager = aiManager;
+        return true;
+    }
+
     public static bool TryGetUIManager(out UIManager refUIManager)
     {
         refUIManager = null;
@@ -38,22 +48,22 @@ public class Managers : MonoBehaviour
         refUIManager = uiManager;
         return true;
     }
-
-    public void Start()
-    {
-        destroyManager = this.GetComponent<DestroyManager>();
-        playerManager = this.GetComponent<PlayerManager>();
-        uiManager = this.GetComponent<UIManager>();
-        gameManager = this.GetComponent<GameManager>();
-
-        IsReady = true;
-    }
-
     public static bool TryGetGameManager(out GameManager refGameManager)
     {
         refGameManager = null;
         if (!IsReady) return false;
         refGameManager = gameManager;
         return true;
+    }
+
+    public void Start()
+    {
+        destroyManager = this.GetComponent<DestroyManager>();
+        playerManager = this.GetComponent<PlayerManager>();
+        aiManager = this.GetComponent<AIManager>();
+        uiManager = this.GetComponent<UIManager>();
+        gameManager = this.GetComponent<GameManager>();
+
+        IsReady = true;
     }
 }

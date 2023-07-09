@@ -24,11 +24,17 @@ public class UIManager : MonoBehaviour
     #region AI_UI
     [Header("AI UI")]
     [Header("Display Info")]
-    public Image[] BuyIcons;
+    //public Image[] BuyIcons;
+    public GameObject BuyTemplate;
+    public Transform BuyPanel;
     public TMP_Text TMPCash;
+
+
+    private bool aiBuyOptionsInitialized = false;
     #endregion AI_UI
 
     private PlayerManager playerManager;
+    private AIManager aiManager;
     private GameManager gameManager;
 
     private void RenderPlayerUI()
@@ -53,9 +59,28 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void InitializeAIUI()
+    {
+        if (this.aiManager.AIAssets == null) return;
+        if (this.aiManager.AIAssets.Length == 0) return;
+
+        for (int index = 0; index < this.aiManager.AIAssets.Length; index++)
+        {
+            GameObject panel = GameObject.Instantiate(BuyTemplate, BuyPanel);
+            
+            panel.GetComponent<BuyTemplateInfo>().Configure(this.aiManager.AIAssets[index], index);
+        }
+
+        this.aiBuyOptionsInitialized = true;
+    }
+
     private void RenderAIUI()
     {
-
+        if (this.aiManager == null) Managers.TryGetAIManager(out this.aiManager);
+        else
+        {
+            if (!aiBuyOptionsInitialized) InitializeAIUI();
+        }
     }
 
     private void Update()
