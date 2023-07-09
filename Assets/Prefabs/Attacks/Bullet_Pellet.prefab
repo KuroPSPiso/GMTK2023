@@ -75,7 +75,8 @@ MonoBehaviour:
   DamageOnHit: 1
   Speed: 5
   IsFromPlayer: 0
-  SoundClip: {fileID: 0}
+  SpawnAudioClip: {fileID: 8300000, guid: f5cc5f24ec9e74a4b8b4c4f503d4abfb, type: 3}
+  DestroyAudioClip: {fileID: 8300000, guid: 931050a1f6fac454e8ef71c343287f65, type: 3}
 --- !u!1001 &6646387824460938147
 PrefabInstance:
   m_ObjectHideFlags: 0

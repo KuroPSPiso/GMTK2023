@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public GameObject Continue;
     public TMP_Text TMPContinueCount;
     public GameObject GameOver;
+    public TMP_Text TMPFinalScore;
     #endregion PLAYER_UI
 
     #region AI_UI
@@ -37,6 +38,8 @@ public class UIManager : MonoBehaviour
     private AIManager aiManager;
     private GameManager gameManager;
 
+    string finalScore = string.Empty;
+
     private void RenderPlayerUI()
     {
         if (this.playerManager == null) Managers.TryGetPlayerManager(out this.playerManager);
@@ -47,6 +50,7 @@ public class UIManager : MonoBehaviour
             HealthBar[0].sprite = (this.playerManager.Health > 0) ? this.playerHealthSpriteRef : this.playerHealthDepletedSpriteRef;
             HealthBar[1].sprite = (this.playerManager.Health > 1) ? this.playerHealthSpriteRef : this.playerHealthDepletedSpriteRef;
             HealthBar[2].sprite = (this.playerManager.Health > 2) ? this.playerHealthSpriteRef : this.playerHealthDepletedSpriteRef;
+            
         }
 
         if (this.gameManager == null) Managers.TryGetGameManager(out this.gameManager);
@@ -56,6 +60,11 @@ public class UIManager : MonoBehaviour
             this.Continue.SetActive(this.gameManager.IsCountDown);
             this.TMPContinueCount.text = this.gameManager.CountDownTimer.ToString();
             this.GameOver.SetActive(this.gameManager.IsGameOver);
+
+            if(this.playerManager != null)
+            {
+                this.TMPFinalScore.text = this.playerManager.Score.ToString().PadLeft(6, '0');
+            }
         }
     }
 

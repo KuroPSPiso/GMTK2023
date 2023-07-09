@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         {
             if (!hasInitialized) this.Initialize();
 
-            if (this.playerManager.Health != 0) return;
+            if (this.playerManager.Health > 0) return;
             if(this.Coins > 0)
             {
                 this.countDownTimer -= Time.deltaTime;
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if(this.playerManager.Health == 0 && (this.Coins == 0 || this.countDownTimer <= 0f))
+            if(this.playerManager.Health <= 0 && (this.Coins == 0 || this.countDownTimer <= 0f))
             {
                 this.IsGameOver = true;
             }

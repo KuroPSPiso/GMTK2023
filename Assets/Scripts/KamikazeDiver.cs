@@ -5,7 +5,7 @@ using UnityEngine;
 public class KamikazeDiver : MonoBehaviour
 {
     public float Speed = 5f;
-    public AudioClip SoundClip;
+    public AudioClip DestroyAudioClip;
     public Vector3 Direction;
     private DestroyManager destroyManagerRef;
     private bool isDestroying = false;
@@ -55,7 +55,12 @@ public class KamikazeDiver : MonoBehaviour
 
         if (isHittingPlayer)
         {
-            
+            PlayerManager playerManager;
+            if (Managers.TryGetPlayerManager(out playerManager))
+            {
+                //TODO: add invincibility frames
+                playerManager.Health--;
+            }
 
             if (!this.isDestroying)
             {
@@ -65,6 +70,7 @@ public class KamikazeDiver : MonoBehaviour
                     GameObject.Destroy(child.gameObject);
                 }
                 GameObject.Destroy(this.gameObject);
+                if (this.DestroyAudioClip != null) Camera.main.GetComponent<AudioSource>().PlayOneShot(this.DestroyAudioClip);
             }
             
         }

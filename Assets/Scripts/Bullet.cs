@@ -7,7 +7,8 @@ public class Bullet : MonoBehaviour
     public float DamageOnHit = 1f;
     public float Speed = 5f;
     public bool IsFromPlayer = false;
-    public AudioClip SoundClip;
+    public AudioClip SpawnAudioClip;
+    public AudioClip DestroyAudioClip;
     private DestroyManager destroyManagerRef;
     private bool isDestroying = false;
     private Vector3 direction;
@@ -16,7 +17,7 @@ public class Bullet : MonoBehaviour
     public void OnSpawn(Vector3 direction, bool isFromPlayer = false, float SpeedMultiplier = 1f)
     {
         this.direction = direction;
-        if(SoundClip != null) Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundClip);
+        if(SpawnAudioClip != null) Camera.main.GetComponent<AudioSource>().PlayOneShot(SpawnAudioClip);
         this.Speed *= SpeedMultiplier;
         this.IsFromPlayer = isFromPlayer;
         this.isInitialized = true;
@@ -92,6 +93,7 @@ public class Bullet : MonoBehaviour
                         GameObject.Destroy(child.gameObject);
                     }
                     GameObject.Destroy(this.gameObject);
+                    if(this.DestroyAudioClip != null) Camera.main.GetComponent<AudioSource>().PlayOneShot(this.DestroyAudioClip);
                 }
             }
         }

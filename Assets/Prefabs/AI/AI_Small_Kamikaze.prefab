@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 8
-  SoundClip: {fileID: 0}
+  DestroyAudioClip: {fileID: 8300000, guid: bfd8581873ff4734396992db3dcbb1d5, type: 3}
   Direction: {x: 0, y: -1, z: 0}
 --- !u!114 &2141368917005961502
 MonoBehaviour:
@@ -113,10 +113,11 @@ MonoBehaviour:
   CanDropPower: 1
   CanDropBomb: 0
   ModifierMaterialRef: {fileID: 2772706911987574184}
-  DropRate: 20
+  DropRate: 10
   Health: 0
   Score: 50
   clip: {fileID: 0}
+  Identifier: 
 --- !u!1001 &2141368916276954407
 PrefabInstance:
   m_ObjectHideFlags: 0

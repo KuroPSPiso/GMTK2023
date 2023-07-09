@@ -26,6 +26,11 @@ public class CameraSetup : MonoBehaviour
         SetCameraResolution();
     }
 
+    public void SwitchTATEMode()
+    {
+        this.IsTateMode = !this.IsTateMode;
+    }
+
     void SetCameraResolution()
     {
         if ((this.lastWidth = Screen.width) >= (this.lastHeight = Screen.height) && !IsTateMode)
